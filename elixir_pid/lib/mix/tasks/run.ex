@@ -15,7 +15,8 @@ defmodule Mix.Tasks.RunTask do
     # 2) use processes other to represent individual variables.
     # 3) optional: write a function to learn all modules that have been included into a process.
     # 4) does autocomplete work when using IEx and an agent is wrapped in a module?
-    # 5) spawn, spawn_link, task, agent, genserver ... only concern yourself with extending the main process self().
+    # 5) spawn, spawn_link, task, agent, genserver, Supervisor, Application, DynamicSupervisor ... only concern yourself with extending the main process self().
+    # 6) extend the main spawn module to include other modules as public interface. # might use metaprogramming might not.
   end
 
   @shortdoc "implementation of process examples from https://elixir-lang.org/getting-started/processes.html"
@@ -76,4 +77,21 @@ end
   https://www.oreilly.com/learning/playing-with-processes
   https://hexdocs.pm/elixir/Process.html
   https://elixirschool.com/en/lessons/advanced/concurrency/
+  https://github.com/jax-ex-public-repos/genstage_examples/blob/master/lib/genstage_example/consumer.ex
+  https://culttt.com/2016/08/10/working-state-elixir-processes/#modules for public interface with autocomplete methods via IEx.
+  https://github.com/jax-ex-public-repos/transcript-fromElixirWorkshop/blob/dev-with-tests/lib/conversation.ex
+  https://stackoverflow.com/questions/1636455/where-is-erlang-used-and-why
+  https://github.com/fishcakez/core
+  https://elixir-lang.org/getting-started/mix-otp/supervisor-and-application.html#Application
+  https://elixir-lang.org/getting-started/mix-otp/dynamic-supervisor.html
+  https://code.tutsplus.com/articles/ets-tables-in-elixir--cms-29526#ETS
+  https://elixir-lang.org/getting-started/mix-otp/distributed-tasks.html
+
+  investigating IEx
+  https://github.com/elixir-lang/elixir/blob/master/lib/iex/test/test_helper.exs#L5
+  https://github.com/elixir-lang/elixir/blob/master/lib/iex/test/test_helper.exs#L62
+  https://github.com/elixir-lang/elixir/blob/master/lib/iex/lib/iex/server.ex
+  https://github.com/elixir-lang/elixir/blob/master/lib/iex/lib/iex.ex#L775
+  https://github.com/elixir-lang/elixir/blob/master/lib/iex/lib/iex/app.ex
+  https://github.com/elixir-lang/elixir/blob/master/lib/iex/lib/iex/evaluator.ex#L4
 '''
