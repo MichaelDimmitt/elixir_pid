@@ -1,10 +1,8 @@
 defmodule Mix.Tasks.RunTask do
   use Mix.Task
-
-  @shortdoc "Simply calls the Hello.say/0 function."
+  @shortdoc "Simply calls ElixirPidExamples.filePid/1 and ElixirPidExamples.filePid/1 functions."
   def run(_) do
-    # calling our Hello.say() function from earlier
-    ElixirPid.hello() |>
-    IO.inspect()
+    ElixirPidExamples.filePid('hello') |> IO.inspect()
+    ElixirPidExamples.file('hello') |> IO.inspect()
   end
 end
