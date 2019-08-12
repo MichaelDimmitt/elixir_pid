@@ -5,11 +5,17 @@ defmodule Mix.Tasks.RunTask do
     ElixirPidExamples.filePid('hello') |> IO.inspect()
     ElixirPidExamples.file('hello') |> IO.inspect()
     from_the_docs()
+    res = {ping, pong} = Table.start |> IO.inspect()
+    send ping, {pong, :ping}
+    receive do
+      {_, _never_gets_reached}  -> "won't match"
+    end
     # future plan: use self() for everything.
     # 1) instead of variables maintain state by sending to self using send and recieve
     # 2) use processes other to represent individual variables.
     # 3) optional: write a function to learn all modules that have been included into a process.
-    # 4) spawn, spawn_link, task, agent, genserver ... only concern yourself with extending the main process self().
+    # 4) does autocomplete work when using IEx and an agent is wrapped in a module?
+    # 5) spawn, spawn_link, task, agent, genserver ... only concern yourself with extending the main process self().
   end
 
   @shortdoc "implementation of process examples from https://elixir-lang.org/getting-started/processes.html"
@@ -38,4 +44,36 @@ defmodule Mix.Tasks.RunTask do
     send self(), :hello |> IO.inspect()
   end
 end
+defmodule Table do
+  def ping do
+    receive do
+      {from, :ping} ->
+        IO.puts 'ping process reached, going to respond with :pong'
+        :timer.sleep(1000)
+        send from, {self(), :pong}
+    end
+    ping
+  end
 
+  def pong do #1
+    receive do
+      {from, :pong} -> #2
+        IO.puts 'pong process reached, going to respond with :ping'
+        :timer.sleep(1000) #4
+        send from, {self(), :ping} #3
+    end
+    pong
+  end
+
+  def start do
+    ping_pid = spawn __MODULE__, :ping, []
+    pong_pid = spawn __MODULE__, :pong, [] #5
+    {ping_pid, pong_pid}
+  end
+end
+'''
+  misc links:
+  https://www.oreilly.com/learning/playing-with-processes
+  https://hexdocs.pm/elixir/Process.html
+  https://elixirschool.com/en/lessons/advanced/concurrency/
+'''
