@@ -5,13 +5,16 @@ defmodule Mix.Tasks.RunTask do
     ElixirPidExamples.filePid('hello') |> IO.inspect()
     ElixirPidExamples.file('hello') |> IO.inspect()
     from_the_docs()
+    # future plan: use self() for everything.
+    # 1) instead of variables maintain state by sending to self using send and recieve
+    # 2) use processes other to represent individual variables.
+    # 3) optional: write a function to learn all modules that have been included into a process.
+    # 4) spawn, spawn_link, task, agent, genserver ... only concern yourself with extending the main process self().
   end
 
   @shortdoc "implementation of process examples from https://elixir-lang.org/getting-started/processes.html"
   def from_the_docs() do
     pid = spawn fn -> 1 + 2 end
-    qqq = quote do: pid
-    qqq|> IO.inspect()
     pid |> IO.inspect()
     Process.alive?(pid) |> IO.inspect()
     self() |> IO.inspect()
