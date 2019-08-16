@@ -24,5 +24,9 @@ My goal with this project is to add more recieve commands in the self() process 
 4) 
 5)
 
+## Max out some elixir data:
+![Max out some elixir data](https://user-images.githubusercontent.com/11463275/63184613-b97fe380-c025-11e9-96bb-9986fec958fd.png)
+https://stackoverflow.com/questions/28093580/how-to-get-minimum-and-maximum-value-of-each-type-in-elixir
+
 ## Collection of topics similar to this project:
 https://youtu.be/WvYtaVW4ACo?t=2343
